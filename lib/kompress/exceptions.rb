@@ -1,0 +1,1 @@
+class Kompress::NoConfigurationError < StandardError; end
