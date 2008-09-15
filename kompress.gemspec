@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.has_rdoc = false
   s.require_path = '.'
   s.authors = ["Erik Kastner"]
-  s.files = ["lib/kompress.rb", "README.mkdn"]
+  s.files = ["lib/kompress.rb", "README.mkdn", "lib/kompress/compress.rb",
+             "lib/kompress/config.rb", "lib/kompress/exceptions.rb"]
   s.rdoc_options = ["--main", "README.mkdn"]
 end
