@@ -24,7 +24,12 @@ describe "Kompress::Config" do
 
   it "should map settings" do
     Kompress::Config.settings[:directory].should == "/t"
-  end  
+  end
+  
+  it "should be emptyable" do
+    Kompress::Config.reset
+    Kompress::Config.settings.should == nil
+  end
 end
 
 describe "Kompress::Config::Preset" do

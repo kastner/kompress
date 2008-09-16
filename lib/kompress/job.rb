@@ -34,7 +34,7 @@ module Kompress
     
     def kc_replacements
       kc = Kompress::Config
-      kc.settings.merge(kc.commands.merge(@options))
+      (kc.settings || {}).merge((kc.commands || {}).merge(@options))
     end
     
     def replacements

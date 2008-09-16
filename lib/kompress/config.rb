@@ -29,6 +29,10 @@ module Kompress
       end
     end
     
+    def reset
+      @commands = @settings = nil
+    end
+    
     class Preset
       attr_reader :name, :command
       attr_accessor :options
