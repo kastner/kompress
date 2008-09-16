@@ -110,6 +110,6 @@ describe "A frozen job" do
   end
   
   it "should be considered active" do
-    @job.state.should == :active
+    @job.state.should == :running
   end
 end

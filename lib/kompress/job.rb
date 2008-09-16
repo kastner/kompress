@@ -7,7 +7,7 @@ module Kompress
       rpls = YAML.load(open(file).read)
       job = new
       job.instance_eval do
-        @state = :active
+        @state = :running
         @job_id = rpls[:job_id]
         @container_type = rpls[:container_type]
         @input_file = rpls[:input_file]
