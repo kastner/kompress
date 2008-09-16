@@ -1,3 +1,5 @@
+$:.unshift(File.dirname(__FILE__))
+
 require 'kompress/compress'
 require 'kompress/config'
 require 'kompress/exceptions'
