@@ -108,4 +108,8 @@ describe "A frozen job" do
   it "should have a lame kc_replacements method" do
     @job.kc_replacements.should == @job.options
   end
+  
+  it "should be considered active" do
+    @job.state.should == :active
+  end
 end
