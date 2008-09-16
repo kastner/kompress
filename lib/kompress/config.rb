@@ -30,19 +30,13 @@ module Kompress
     end
     
     class Preset
-      attr_reader :name
+      attr_reader :name, :command
       attr_accessor :options
       
       def initialize(name, options = {})
         @command = options.delete(:command) || ""
         @name = name.to_s
         @options = options
-      end
-      
-      def command
-        kc = Kompress::Config
-        replacements = kc.settings.merge(kc.commands.merge(@options))
-        @command.gsub(/:\w+/) {|s| replacements[s.gsub(/^:/,'').intern] || s }
       end
       
       def description

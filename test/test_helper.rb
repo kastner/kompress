@@ -1,8 +1,10 @@
 begin
   require 'test/spec'
+  require 'mocha'
 rescue LoadError
   require 'rubygems'
   require 'test/spec'
+  require 'mocha'
 end
 
 begin

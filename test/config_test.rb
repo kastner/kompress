@@ -24,11 +24,7 @@ describe "Kompress::Config" do
 
   it "should map settings" do
     Kompress::Config.settings[:directory].should == "/t"
-  end
-  
-  it "should substitue placeholders" do
-    Kompress::Config.presets[:test].command.should == "/usr/bin/ffmpeg go > /t"
-  end
+  end  
 end
 
 describe "Kompress::Config::Preset" do

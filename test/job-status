@@ -1,0 +1,24 @@
+FFmpeg version SVN-r9226, Copyright (c) 2000-2007 Fabrice Bellard, et al.
+  libavutil: 49.4.0  libavcodec: 51.40.4  libavformat: 51.12.1
+  built: Feb 12 2008 19:58:15, gcc: 4.0.1 (Apple Computer, Inc. build 5367), i386
+
+Seems stream 0 codec frame rate differs from container frame rate: 1000.00 (1000/1) -> 44.92 (539/12)
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/Users/kastner/Development/Ruby/test.mov':
+Duration-06
+start-0.000000
+bitrate-1585
+
+0.0,,,(eng),,Video,mpeg4,yuv420p,640,480,44.92
+0.1,,,(eng),,Audio,mpeg4aac,44100,2
+Output #0, mp4, to '/Users/kastner/Development/Ruby/test.tmp.mp4':
+0.0,,,,,Video,mpeg4,yuv420p,640,480, q=1-31,44.92
+0.1,,,,,Audio,libfaac,44100,2,64
+Stream mapping:
+  Stream #0.0 -> #0.0
+  Stream #0.1 -> #0.1
+Press [q] to stop encoding
+frame=   54 fps=  0 q=4.2 size=     183kB time=1.2 bitrate=1244.3kbits/s    
+frame=  114 fps=113 q=8.9 size=     269kB time=2.5 bitrate= 895.3kbits/s    
+frame=  157 fps=115 q=9.4 Lsize=     330kB time=3.4 bitrate= 796.3kbits/s    
+video:12kB audio:19kB global headers:0kB muxing overhead 935.696529%
+Received signal 2: terminating.
