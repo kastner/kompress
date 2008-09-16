@@ -111,6 +111,7 @@ module Kompress
     end
     
     def go
+      @state = :running
       Thread.new do
         system command
       end
