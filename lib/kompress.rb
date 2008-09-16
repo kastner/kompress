@@ -1,5 +1,7 @@
 $:.unshift(File.dirname(__FILE__))
 
+require 'YAML'
+
 require 'kompress/compress'
 require 'kompress/config'
 require 'kompress/exceptions'
