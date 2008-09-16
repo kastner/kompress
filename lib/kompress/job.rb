@@ -72,7 +72,15 @@ module Kompress
     end
     
     def duration
-      @duration ||= status_contents[@options[:duration_regexp], 1].to_f
+      @duration ||= begin
+        d = status_contents[@options[:duration_regexp], 1]
+        if (d.match(/:/))
+          p = d.split(/:/)
+          p[-1].to_f + p[-2].to_f * 60 + p[-3].to_f * 60 * 60
+        else
+          d.to_f
+        end
+      end
     end
     
     def total_frames

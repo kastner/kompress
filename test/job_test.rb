@@ -27,6 +27,21 @@ describe "Kompress::Job" do
   end
 end
 
+describe "A fake job" do
+  setup do
+    Kompress::Config.write do |k|
+      k.preset :t => { :duration_regexp => /Duration: ([\d:]+)/ }
+    end
+    
+    @job = Kompress::Job.from_preset(:t, "")
+    @job.stubs(:status_contents).returns("Duration: 00:01:26.95, start: 0.0000")
+  end
+  
+  it "should calculate seconds" do
+    @job.duration.should == 86.0
+  end
+end
+
 describe "A real job" do
   setup do
     Kompress::Config.write do |k|
