@@ -1,6 +1,6 @@
 $:.unshift(File.dirname(__FILE__))
 
-require 'YAML'
+require 'yaml'
 
 require 'kompress/compress'
 require 'kompress/config'
