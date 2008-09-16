@@ -82,5 +82,20 @@ describe "A real job" do
 
   it "should know it's current frame #" do
     @job.current_frame.should == 157
+    puts @job.replacements.to_yaml
+  end
+end
+
+describe "A frozen job" do
+  setup do
+    @job = Kompress::Job.from_file(File.dirname(__FILE__) + "/job-freeze")
+  end
+  
+  it "should have the right job id" do
+    @job.job_id.should == "1221549341-rad"
+  end
+
+  it "should have the right post_command" do
+    @job.post_command.should == "/usr/bin/qt-faststart ~/Development/Ruby/test.tmp.mp4 ~/Development/Ruby/test.mp4"
   end
 end

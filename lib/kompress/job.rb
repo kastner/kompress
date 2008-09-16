@@ -1,16 +1,31 @@
 module Kompress
   class Job
-    attr_reader :options, :job_id, :input_file, :container_type
+    attr_accessor :options, :job_id, :input_file, :container_type
     attr_accessor :state
+
+    def self.from_file(file)
+      rpls = YAML.load(open(file).read)
+      job = new
+      job.instance_eval do
+        @job_id = rpls[:job_id]
+        @container_type = rpls[:container_type]
+        @input_file = rpls[:input_file]
+        @options = rpls
+        def replacements; @options; end
+      end
+      job
+    end
     
     def self.from_preset(preset, input_file, container_type = "mp4")
       config_preset = Kompress::Config.presets[preset]
       raise Kompress::NoConfigurationError unless config_preset
       
-      new(preset, config_preset.command, input_file, container_type, config_preset.options)
+      job = new
+      job.fill(preset, config_preset.command, input_file, container_type, config_preset.options)
+      job
     end
     
-    def initialize(name, command, input_file, container_type, options)
+    def fill(name, command, input_file, container_type, options)
       @state = :pending
       @options, @input_file, @command = options, input_file, command
       @container_type = container_type
@@ -25,6 +40,8 @@ module Kompress
     def replacements
       rpl = {}
       rpl[:job_id] = @job_id
+      rpl[:container_type] = @container_type
+      rpl[:input_file] = @input_file
       rpl.merge(kc_replacements)
     end
     
@@ -57,6 +74,10 @@ module Kompress
     
     def status_file
       kc_replacements[:directory] + "/kompress-#{@job_id}"
+    end
+
+    def state_file
+      kc_replacements[:directory] + "/kompress-#{@job_id}.state"
     end
     
     def done_file
@@ -105,13 +126,21 @@ module Kompress
     end
     
     def cleanup
+      File.unlink(state_file)
       File.unlink(status_file)
       File.unlink(done_file)
       File.unlink(temp_file)
     end
     
+    def write_state_to_disk
+      File.new(state_file, "w") do |f|
+        f.puts replacements.to_yaml
+      end
+    end
+    
     def go
       @state = :running
+      write_state_to_disk
       Thread.new do
         system command
       end

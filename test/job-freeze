@@ -1,0 +1,11 @@
+--- 
+:frame_rate_regexp: !ruby/regexp /0.0,,,,,Video,.*q=.*,([\d\.]+)$/
+:job_id: 1221549341-rad
+:post_command: ":qt_faststart :temp_file :output_file"
+:qt_faststart: /usr/bin/qt-faststart
+:current_frame_regexp: !ruby/regexp /frame=\s*(\d+)/
+:input_file: ~/Development/Ruby/test.mov
+:container_type: mp4
+:duration_regexp: !ruby/regexp /Duration-(\d+)/
+:ffmpeg: /Library/Application\ Support/Techspansion/vh131ffmpeg
+:directory: /tmp
