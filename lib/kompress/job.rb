@@ -133,7 +133,7 @@ module Kompress
     end
     
     def write_state_to_disk
-      File.new(state_file, "w") do |f|
+      File.open(state_file, "w") do |f|
         f.puts replacements.to_yaml
       end
     end
