@@ -1,6 +1,6 @@
 module Kompress
   class Job
-    attr_accessor :options, :job_id, :input_file, :container_type
+    attr_accessor :options, :job_id, :input_file, :container_type, :start_time
     attr_accessor :state
 
     def self.from_file(file)
@@ -11,6 +11,7 @@ module Kompress
         @job_id = rpls[:job_id]
         @container_type = rpls[:container_type]
         @input_file = rpls[:input_file]
+        @start_time = rpls[:start_time]
         @options = rpls
         def replacements; @options; end
       end
@@ -27,6 +28,7 @@ module Kompress
     end
     
     def fill(name, command, input_file, container_type, options)
+      @start_time = Time.now
       @state = :pending
       @options, @input_file, @command = options, input_file, command
       @container_type = container_type
@@ -43,6 +45,7 @@ module Kompress
       rpl[:job_id] = @job_id
       rpl[:container_type] = @container_type
       rpl[:input_file] = @input_file
+      rpl[:start_time] = @start_time
       rpl.merge(kc_replacements)
     end
     

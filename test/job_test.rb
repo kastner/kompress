@@ -84,6 +84,10 @@ describe "A real job" do
     @job.current_frame.should == 157
     # puts @job.replacements.to_yaml
   end
+  
+  it "should have a start time" do
+    @job.start_time.should.be.kind_of Time
+  end
 end
 
 describe "A frozen job" do
@@ -111,5 +115,10 @@ describe "A frozen job" do
   
   it "should be considered active" do
     @job.state.should == :running
+  end
+  
+  it "should unfreeze the start time" do
+    @job.start_time.year.should.be 2008
+    @job.start_time.month.should.be 9
   end
 end
