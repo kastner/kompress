@@ -50,7 +50,8 @@ describe "A real job" do
       k.setting :qt_faststart => "/usr/bin/qt-faststart"
       
       k.preset :rad => {
-        :command => %Q{:ffmpeg -y -i :input_file :temp_file 2>> :status_file ; echo done > :done_file},
+        :command => %Q{:ffmpeg -y -i :input_file :temp_file 640x:width 2>> :status_file ; echo done > :done_file},
+        :width => 480,
         :post_command => %Q{:qt_faststart :temp_file :output_file},
         :frame_rate_regexp => /0.0,,,,,Video,.*q=.*,([\d\.]+)$/,
         :duration_regexp => /Duration-(\d+)/,
@@ -87,6 +88,16 @@ describe "A real job" do
   
   it "should have a start time" do
     @job.start_time.should.be.kind_of Time
+  end
+  
+  it "should substitute fields without spaces" do
+    @job.command.should =~ /640x480/
+  end
+  
+  it "should be changable" do
+    @job.options[:width] = 300
+    @job.command.should =~ /640x300/
+    @job.command.should.not =~ /640x480/
   end
 end
 
