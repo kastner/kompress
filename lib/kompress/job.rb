@@ -1,6 +1,6 @@
 module Kompress
   class Job
-    attr_accessor :options, :job_id, :input_file, :container_type, :start_time
+    attr_accessor :options, :job_id, :input_file, :container_type, :start_time, :thumb_type
     attr_accessor :state
 
     def self.from_file(file)
@@ -18,19 +18,20 @@ module Kompress
       job
     end
     
-    def self.from_preset(preset, input_file, container_type = "mp4")
+    def self.from_preset(preset, input_file, container_type = "mp4", thumb_type = "jpg")
       config_preset = Kompress::Config.presets[preset]
       raise Kompress::NoConfigurationError unless config_preset
       
       job = new
-      job.fill(preset, config_preset.command, input_file, container_type, config_preset.options)
+      job.fill(preset, config_preset.command, input_file, container_type, thumb_type, config_preset.options)
       job
     end
     
-    def fill(name, command, input_file, container_type, options)
+    def fill(name, command, input_file, container_type, thumb_type, options)
       @start_time = Time.now
       @state = :pending
       @options, @input_file, @command = options, input_file, command
+      @thumb_type = thumb_type
       @container_type = container_type
       @job_id = Time.now.to_i.to_s + "-" + name.to_s
     end
@@ -44,6 +45,7 @@ module Kompress
       rpl = {}
       rpl[:job_id] = @job_id
       rpl[:container_type] = @container_type
+      rpl[:thumb_type] = @thumb_type
       rpl[:input_file] = @input_file
       rpl[:start_time] = @start_time
       rpl.merge(kc_replacements)
@@ -67,6 +69,10 @@ module Kompress
     
     def output_file
       input_file.gsub(file_type_regexp, ".#{container_type}")
+    end
+    
+    def thumb_file
+      input_file.gsub(file_type_regexp, ".#{thumb_type}")
     end
     
     def substitute(string, subs)
