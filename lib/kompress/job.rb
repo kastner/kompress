@@ -57,12 +57,16 @@ module Kompress
       substitute(options[:post_command], replacements)
     end
     
+    def file_type_regexp
+      /\.(mov|avi|mp4|flv|wmv|mpg|mpeg|mpg)/
+    end
+    
     def temp_file
-      input_file.gsub(/\.(mov|avi|mp4|flv|wmv)$/, ".tmp.#{container_type}")
+      input_file.gsub(file_type_regexp, ".tmp.#{container_type}")
     end
     
     def output_file
-      input_file.gsub(/\.(mov|avi|mp4|flv|wmv)$/, ".#{container_type}")
+      input_file.gsub(file_type_regexp, ".#{container_type}")
     end
     
     def substitute(string, subs)
