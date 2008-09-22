@@ -125,7 +125,7 @@ module Kompress
     end
     
     def finalize
-      system(post_command) if post_command
+      `#{post_command}` if post_command
       cleanup
     end
     
@@ -146,7 +146,7 @@ module Kompress
       @state = :running
       write_state_to_disk
       Thread.new do
-        system command
+        `#{command}`
       end
       
       while (!File.exists?(status_file)); sleep 0.2; end
