@@ -93,7 +93,7 @@ module Kompress
     end
     
     def frame_rate
-      @frame_rate ||= status_contents[@options[:frame_rate_regexp], 1].to_f
+      @frame_rate ||= status_contents[@options[:frame_rate_regexp], 1].to_f.ceil
     end
     
     def duration
@@ -109,7 +109,7 @@ module Kompress
     end
     
     def total_frames
-      duration * frame_rate
+      (duration * frame_rate).to_i
     end
     
     def current_frame

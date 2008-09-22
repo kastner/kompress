@@ -70,7 +70,8 @@ describe "A real job" do
   end
   
   it "should know frame rate" do
-    @job.frame_rate.should == 44.92
+    # @job.frame_rate.should == 44.92
+    @job.frame_rate.should == 45
   end
   
   it "should know duration" do
@@ -78,7 +79,7 @@ describe "A real job" do
   end
   
   it "should know total frames" do
-    @job.total_frames.should == 269.52
+    @job.total_frames.should == 270
   end
 
   it "should know it's current frame #" do
