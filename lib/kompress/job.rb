@@ -58,7 +58,7 @@ module Kompress
     end
     
     def file_type_regexp
-      /\.(mov|avi|mp4|flv|wmv|mpg|mpeg|mpg)/
+      /\.(mov|avi|mp4|flv|wmv|mpg|mpeg|mpg|divx)/i
     end
     
     def temp_file

@@ -26,7 +26,7 @@ describe "Kompress::Job" do
     @job.status_file.should == "/t/kompress-#{@job.job_id}"
   end
   
-  %w|mov wmv avi mp4 mpg mpeg|.each do |type|
+  %w|mov wmv avi mp4 mpg mpeg MOV divx|.each do |type|
     it "should replace .#{type} with .tmp.mp4" do
       @job.input_file = "x.#{type}"
       @job.temp_file.should == "x.tmp.mp4"
