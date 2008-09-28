@@ -12,6 +12,7 @@ module Kompress
         @container_type = rpls[:container_type]
         @input_file = rpls[:input_file]
         @start_time = rpls[:start_time]
+        @thumb_type = rpls[:thumb_type]
         @options = rpls
         def replacements; @options; end
       end

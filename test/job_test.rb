@@ -145,4 +145,8 @@ describe "A frozen job" do
     @job.start_time.year.should.be 2008
     @job.start_time.month.should.be 9
   end
+  
+  it "should be able to get the thumb name" do
+    @job.thumb_file.should == "~/Development/Ruby/test.jpg"
+  end
 end
