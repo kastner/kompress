@@ -60,7 +60,7 @@ module Kompress
     end
     
     def file_type_regexp
-      /\.(mov|avi|mp4|flv|wmv|mpg|mpeg|mpg|divx)/i
+      /\.(#{Kompress::FileTypes.join("|")})/i
     end
     
     def temp_file
