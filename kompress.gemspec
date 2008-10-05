@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "kompress"
-  s.version = "0.0.7"
+  s.version = "0.0.8"
   s.date = "2008-09-14"
   s.summary = "Kompress - kompress videos and see progress"
   s.email = "kastner@gmail.com"

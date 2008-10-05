@@ -73,12 +73,12 @@ module Kompress
       input_file.gsub(file_type_regexp, ".tmp.#{container_type}")
     end
     
-    def raw_temp_file
-      temp_file.gsub(/'(.*)'/, '\1')
-    end
-    
     def output_file
       input_file.gsub(file_type_regexp, ".#{container_type}")
+    end
+
+    %w|input output temp|.each do |f|
+      define_method("raw_#{f}_file".to_sym) { send("#{f}_file").gsub(/'(.*)'/, '\1') }
     end
     
     def thumb_file

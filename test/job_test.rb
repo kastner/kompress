@@ -112,6 +112,12 @@ describe "A real job" do
     @job.command.should =~ /640x300/
     @job.command.should.not =~ /640x480/
   end
+  
+  it "should have a raw version of input, output and temp" do
+    %w|input output temp|.each do |f|
+      @job.send("raw_#{f}_file").should == @job.send("#{f}_file").gsub(/'(.*)'/, '\1')
+    end
+  end
 end
 
 describe "A frozen job" do
