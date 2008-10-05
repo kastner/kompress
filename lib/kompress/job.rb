@@ -73,6 +73,10 @@ module Kompress
       input_file.gsub(file_type_regexp, ".tmp.#{container_type}")
     end
     
+    def raw_temp_file
+      temp_file.gsub(/'(.*)'/, '\1')
+    end
+    
     def output_file
       input_file.gsub(file_type_regexp, ".#{container_type}")
     end
@@ -149,7 +153,7 @@ module Kompress
       File.unlink(state_file)
       File.unlink(status_file)
       File.unlink(done_file)
-      File.unlink(temp_file)
+      File.unlink(raw_temp_file)
     end
     
     def write_state_to_disk
