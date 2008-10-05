@@ -64,6 +64,11 @@ module Kompress
       /\.(#{Kompress::FileTypes.join("|")})/i
     end
     
+    def input_file
+      return @input_file if @input_file.match(/^'/)
+      "'#{@input_file}'"
+    end
+    
     def temp_file
       input_file.gsub(file_type_regexp, ".tmp.#{container_type}")
     end

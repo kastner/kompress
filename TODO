@@ -1,3 +1,4 @@
 [done] Capture start time for estimates
 make a new state between pending and running
 [done] round up frame-rate
+allow for spaces in file names

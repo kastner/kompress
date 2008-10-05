@@ -28,13 +28,13 @@ describe "Kompress::Job" do
   
   it "should have a thumb file" do
     @job.input_file = "bob.mpg"
-    @job.thumb_file.should == "bob.jpg"
+    @job.thumb_file.should == "'bob.jpg'"
   end
   
   %w|mov wmv avi mp4 mpg mpeg MOV divx|.each do |type|
     it "should replace .#{type} with .tmp.mp4" do
       @job.input_file = "x.#{type}"
-      @job.temp_file.should == "x.tmp.mp4"
+      @job.temp_file.should == "'x.tmp.mp4'"
     end
   end
 end
@@ -70,7 +70,7 @@ describe "A real job" do
         :current_frame_regexp => /frame=\s*(\d+)/
       }
       
-      @job = Kompress::Job.from_preset(:rad, "~/Development/Ruby/test.mov")
+      @job = Kompress::Job.from_preset(:rad, "~/Development/Ruby/test movie.mov")
       @job.state = :running
     end
     
@@ -78,7 +78,7 @@ describe "A real job" do
   end
   
   it "should know it's post_command" do
-    @job.post_command.should == "/usr/bin/qt-faststart ~/Development/Ruby/test.tmp.mp4 ~/Development/Ruby/test.mp4"
+    @job.post_command.should == "/usr/bin/qt-faststart '~/Development/Ruby/test movie.tmp.mp4' '~/Development/Ruby/test movie.mp4'"
   end
   
   it "should know frame rate" do
@@ -130,7 +130,7 @@ describe "A frozen job" do
   end
 
   it "should have the right post_command" do
-    @job.post_command.should == "/usr/bin/qt-faststart ~/Development/Ruby/test.tmp.mp4 ~/Development/Ruby/test.mp4"
+    @job.post_command.should == "/usr/bin/qt-faststart '~/Development/Ruby/test.tmp.mp4' '~/Development/Ruby/test.mp4'"
   end
   
   it "should have a lame kc_replacements method" do
@@ -147,6 +147,6 @@ describe "A frozen job" do
   end
   
   it "should be able to get the thumb name" do
-    @job.thumb_file.should == "~/Development/Ruby/test.jpg"
+    @job.thumb_file.should == "'~/Development/Ruby/test.jpg'"
   end
 end
